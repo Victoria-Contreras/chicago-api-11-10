@@ -1,0 +1,2 @@
+artist_display string 
+    - Readable description of the creator of this work.     Includes artist names, nationality and lifespan dates
