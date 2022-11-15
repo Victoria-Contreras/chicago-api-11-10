@@ -1,18 +1,21 @@
+let page = 1;
+let searchWord;
+
 const searchForm = document.getElementById('search-form');
 searchForm.addEventListener('submit', function (e) {
     e.preventDefault();
 
     const searchString = document.getElementById('search-result').value;
     const urlEncodedSearchString = encodeURIComponent(searchString);
-
-    displayCardFront(urlEncodedSearchString)
+    searchWord = urlEncodedSearchString
+    displayCardFront(searchWord, page)
 })
 
 
-async function displayCardFront(keyword) {
-    const result = await fetch(`https://api.artic.edu/api/v1/artworks/search?q=${keyword}&fields=id,title,image_id&page=1`)
+async function displayCardFront(keyword, pageNumber) {
+    const result = await fetch(`https://api.artic.edu/api/v1/artworks/search?q=${keyword}&fields=id,title,image_id&page=${pageNumber}`)
     const parsedResponse = await result.json();
-    console.log(parsedResponse)
+    //console.log(parsedResponse)
 
     const htmlArray = [];
     for (let i = 0; i < parsedResponse.data.length; i++) {
@@ -33,4 +36,26 @@ async function displayCardFront(keyword) {
         ${htmlString}
     </div>
     `
+
 }
+
+const navButtons = document.querySelector("nav") 
+navButtons.addEventListener("click", (e) => {
+    let target = e.target.id; 
+    const previousButton = document.getElementById("previous")
+    const nextButton = document.getElementById("next")
+    
+    if (target != "previous" && target != "next") {
+        page = target;
+        
+    } else if (target === "next") {
+        page++
+    } else if (target === "previous" && page != 1) {
+        page--
+    }
+
+    displayCardFront(searchWord, page)
+})
+
+    
+
