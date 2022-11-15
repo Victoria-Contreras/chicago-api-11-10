@@ -1,2 +1,39 @@
-artist_display string 
-    - Readable description of the creator of this work.     Includes artist names, nationality and lifespan dates
+https://api.artic.edu/api/v1/artworks/search?q={keyword}
+"pagination": {
+    "total": 7281,
+    "limit": 10,
+    "offset": 0,
+    "total_pages": 729,
+    "current_page": 1
+},
+"data" [
+    "thumbnail": {
+                "alt_text": "A bronze lion, deep green and muscular, looks out in the distance from its pedestal in front of the Art Institute of Chicago.",
+    "api_link": "https://api.artic.edu/api/v1/artworks/656",
+    "id": 656,
+    "title": "Lion (One of a Pair, South Pedestal)"
+]
+    
+    
+https://api.artic.edu/api/v1/artworks/{id} 
+<!-- this is the api link from above -->
+"data" [
+
+    "title": "Lion (One of a Pair, South Pedestal)"
+    
+    "artist_title": "Edward Kemeys"
+
+    "date_display": "1893"
+
+    "artwork_type_title": "Sculpture" 
+
+    "material_titles": [
+            "bronze",
+            "copper alloy",
+            "nonferrous metal",
+            "metal",
+            "inorganic material"
+        ],
+
+        "image_id": "6b1edb9c-0f3f-0ee3-47c7-ca25c39ee360"
+]
