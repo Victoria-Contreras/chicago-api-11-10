@@ -8,11 +8,11 @@ searchForm.addEventListener('submit', function (e) {
     const searchString = document.getElementById('search-result').value;
     const urlEncodedSearchString = encodeURIComponent(searchString);
     searchWord = urlEncodedSearchString
-    displayCardFront(searchWord, page)
+    displayCard(searchWord, page)
 })
 
 
-async function displayCardFront(keyword, pageNumber) {
+async function displayCard(keyword, pageNumber) {
     const result = await fetch(`https://api.artic.edu/api/v1/artworks/search?q=${keyword}&fields=id,title,image_id&page=${pageNumber}`)
     const parsedResponse = await result.json();
     //console.log(parsedResponse)
@@ -20,24 +20,41 @@ async function displayCardFront(keyword, pageNumber) {
     const htmlArray = [];
     for (let i = 0; i < parsedResponse.data.length; i++) {
         const src = `https://www.artic.edu/iiif/2/${parsedResponse.data[i].image_id}/full/843,/0/default.jpg`
-        const title = parsedResponse.data[i].title
+        const artId = parsedResponse.data[i].id
+        
+        const detailedResult = await fetch(`https://api.artic.edu/api/v1/artworks/${artId}`);
+        const detailedParsedResponse = await detailedResult.json();
+
+        const title = detailedParsedResponse.data.title;
+        const artist = detailedParsedResponse.data.artist_title;
+        const date = detailedParsedResponse.data.date_display;
+        const type = detailedParsedResponse.data.artwork_type_title;
+
+
         const cardHtml = `
-        <img src=${src} class="card-img-top"></img>
-        <div class="card-body">
-            <h5 class="card-title">${title}</h5>
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src=${src} style="width:300px;height:300px; object-fit: cover;">
+                </div>
+                <div class="flip-card-back">
+                    <h1>${title}</h1>
+                    <h2>${artist}</h2>
+                    <p>${date}</p>
+                    <p>${type}</p>
+                </div>
+            </div
         </div>
         `
         htmlArray.push(cardHtml)
     }
 
     const htmlString = htmlArray.join('');
-    document.getElementById("image-container").innerHTML = `
-    <div class="card" style="width: 18rem;">
-        ${htmlString}
-    </div>
-    `
+    document.getElementById("image-container").innerHTML = `${htmlString}`
 
 }
+
+
 
 const navButtons = document.querySelector("nav") 
 navButtons.addEventListener("click", (e) => {
@@ -54,7 +71,7 @@ navButtons.addEventListener("click", (e) => {
         page--
     }
 
-    displayCardFront(searchWord, page)
+    displayCard(searchWord, page)
 })
 
     
