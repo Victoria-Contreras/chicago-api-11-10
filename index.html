@@ -11,26 +11,31 @@
 </head>
 <body>
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-12" id="heading">this is my heading</div>
+        <div class="row border-bottom border-3 border-dark">
+            <div class="col-1 m-2">
+                <img src="./styles/logo.png" alt="" height="75px">
+            </div>
+            <div class="col-6 d-flex" id="heading">
+                <h1 class="align-self-center">Art Institue of Chicago</h1>
+            </div>
         </div>
-        <div class="row">
-            <div class="col-6" id="search">
+        <div class="row mt-5">
+            <div class="col-12 d-flex justify-content-center" id="search">
                 <form id="search-form">
                     <div class="input-group input-group-lg">
                         <input class="form-control search-bar" placeholder="Search for artwork.." id="search-result" />
-                        <button class="btn btn-primary input-group-btn" type="submit">
+                        <button class="btn btn-danger input-group-btn" type="submit">
                             Search
                         </button>
                     </div>
                 </form>
             </div>
         </div>
-        <div class="row" id="image-container">
+        <div class="row mt-5" id="image-container">
              
         </div>
-        <div class="row">
-            <nav class="col-3" aria-label="Page navigation example">
+        <div class="row d-flex justify-content-center">
+            <nav class="col-3 " aria-label="Page navigation example">
                 <ul class="pagination">
                     <li class="page-item">
                         <a class="page-link" id="previous" href="#" aria-label="Previous">&laquo;</a>
