@@ -32,18 +32,22 @@ async function displayCard(keyword, pageNumber) {
 
 
         const cardHtml = `
-        <div class="flip-card">
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <img src=${src} style="width:300px;height:300px; object-fit: cover;">
+        <div class="col-4">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src=${src} alt="" style="height:200px;">
+                    </div>
+                    <div class="flip-card-back" style="height: 200px;">
+                        <div>
+                            <h3>${title}</h3>
+                            <h4>${artist}</h4>
+                            <p>${date}</p>
+                            <p>${type}</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="flip-card-back">
-                    <h1>${title}</h1>
-                    <h2>${artist}</h2>
-                    <p>${date}</p>
-                    <p>${type}</p>
-                </div>
-            </div
+            </div>
         </div>
         `
         htmlArray.push(cardHtml)
